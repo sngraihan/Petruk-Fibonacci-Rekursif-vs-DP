@@ -5,10 +5,19 @@
 using namespace std;
 using namespace chrono;
 
-unsigned long long fibonacciRekursif(int n) {
+unsigned long long fibonacciRekursif1(int n) {
     if (n <= 0) return 0;
     if (n == 1) return 1;
-    return fibonacciRekursif(n - 1) + fibonacciRekursif(n - 2);
+    return fibonacciRekursif1(n - 1) + fibonacciRekursif1(n - 2);
+}
+
+unsigned long long fibonacciRekursif(long long int num){
+    if(num == 0 || num == 1){
+        return num;
+    }
+    else{
+        return fibonacciRekursif(num - 1) + fibonacciRekursif(num - 2);
+    }
 }
 
 unsigned long long fibonacciDP(int n) {
@@ -28,15 +37,14 @@ double time(Func func, int n) {
     auto start = high_resolution_clock::now();
     func(n);
     auto end = high_resolution_clock::now();
-    duration<double, milli> duration = end - start;
+    duration<double, nano> duration = end - start;
     return duration.count();
 }
 
 
 
 int main() {
-    int n_values[] = {10, 25, 30, 40, 50};
-    int num_iterations = 1000;
+    int n_values[] = {50};
 
     for (int n : n_values) {
         unsigned long long result_rekursif = fibonacciRekursif(n);
@@ -47,8 +55,8 @@ int main() {
 		
 		
         cout << "n = " << n << endl;
-        cout << "Rekursif: " << result_rekursif << ", waktu: " << fixed<<setprecision(50) <<rtime << " miliseconds" << endl;
-        cout << "Dynamic Programming: " << result_dp << ", waktu rata-rata: " <<fixed<< setprecision(50) << dptime <<" miliseconds" << endl;
+        cout << "Rekursif: " << result_rekursif << ", waktu: " << fixed<<setprecision(6) <<rtime << " miliseconds" << endl;
+        cout << "Dynamic Programming: " << result_dp << ", waktu rata-rata: " <<fixed<< setprecision(6) << dptime <<" miliseconds" << endl;
         cout << endl;
     }
 
